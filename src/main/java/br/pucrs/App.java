@@ -1,33 +1,39 @@
 package br.pucrs;
 
-import java.util.ArrayList;
+public class App {
+    public static void main(String[] args) {
+        System.out.println(MULTIPLY(7, 5, 4));
+        System.out.println(MULTIPLY(12345, 6789, 16));
+        System.out.println(MULTIPLY(123456789L, 987654321L, 64));
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+        System.out.println(multiply("11", "1011"));
     }
 
-    public ArrayList<> mergeSort(ArrayList<Int> lista){
-        if(lista.size()==1){
-            return lista;
-        }
-        else{
-            ArrayList a = mergeSort(lista.subList(0,lista.size()/2));
-            ArrayList b = mergeSort(lista.subList(lista.size()/2,lista.size()));
+    public static long MULTIPLY(long x, long y, long n) {
+        if (n == 1)
+            return x * y;
+        else {
+            long m   = n / 2;
+            long pot = 1L << m;          // 2^m
+            long a = x / pot;
+            long b = x % pot;
+            long c = y / pot;
+            long d = y % pot;
+            long e = MULTIPLY(a, c, m);
+            long f = MULTIPLY(b, d, m);
+            long g = MULTIPLY(b, c, m);
+            long h = MULTIPLY(a, d, m);
+            return (1L << (2 * m)) * e + pot * (g + h) + f;   // 2^(2m)·e + 2^m·(g+h) + f
         }
     }
-    public ArrayList<Int> organiza(ArrayList<Int> a, ArrayList<Int> b){
-//novo ArrayList
-ArrayList ordenada = new ArrayList<Int> ();
 
-        for (int i =0;i<a.size();i++) {
-            
-        }
+    // Multiplica duas strings de bits x e y
+    // e retorna o resultado como um inteiro "long".
+    // transforma bits em long, chama MULTIPLY e retorna o resultado
+    public static long multiply(String X, String Y){
+        long x = Long.parseLong(X, 2);
+        long y = Long.parseLong(Y, 2);
+        int n = Math.max(X.length(), Y.length());
+        return MULTIPLY(x, y, n);
     }
 }
