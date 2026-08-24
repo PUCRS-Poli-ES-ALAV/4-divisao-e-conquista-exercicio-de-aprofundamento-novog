@@ -10,6 +10,7 @@ public class App {
     }
 
     public static long MULTIPLY(long x, long y, long n) {
+        //interationCounter++;
         if (n == 1)
             return x * y;
         else {
@@ -35,5 +36,15 @@ public class App {
         long y = Long.parseLong(Y, 2);
         int n = Math.max(X.length(), Y.length());
         return MULTIPLY(x, y, n);
+    }
+    //ainda nao implementado
+    //ideia para contar as iteracoes 
+    //realizadas apartir de cada entrada 
+    public long getInterations(){
+        return interationCount;
+    }
+
+    public void resetInterationCount(){
+        interationCount = 0;
     }
 }
